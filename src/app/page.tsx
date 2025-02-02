@@ -8,6 +8,7 @@ import {
   Rocket,
 } from "lucide-react";
 import Footer from "./components/footer";
+import Link from "next/link";
 
 const events = [
   {
@@ -98,16 +99,16 @@ function EventCard({
         <span className="text-sm text-gray-500">{event.location}</span>
         {upcoming ? (
           <button className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700">
-            <a href={event.eventUrl} target="_blank">
+            <Link href={event.eventUrl} target="_blank">
               Register
-            </a>
+            </Link>
             <ArrowRight className="w-4 h-4" />
           </button>
         ) : (
           <button className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700">
-            <a href={event.reportUrl} target="_blank">
+            <Link href={event.reportUrl} target="_blank">
               Read the report
-            </a>
+            </Link>
             <ArrowRight className="w-4 h-4" />
           </button>
         )}
@@ -138,7 +139,7 @@ export default function Home() {
           <div>
             <button className="bg-[#5046e5] text-white px-8 py-3 mb-3 rounded-lg font-medium hover:text-[#5046e5] hover:bg-[#9dff74] transition-colors flex items-center space-x-2 mx-auto">
               <Sparkles className="w-5 h-5" />
-              <a href="/#events">Join next event</a>
+              <Link href="/#events">Join next event</Link>
             </button>
           </div>
         </div>
