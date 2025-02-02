@@ -122,14 +122,15 @@ function EventCard({
             </Link>
             <ArrowRight className="w-4 h-4" />
           </button>
-        ) : (
+        ) : null}
+        {!upcoming && event.reportUrl ? (
           <button className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700">
             <Link href={event.reportUrl} target="_blank">
               Read the report
             </Link>
             <ArrowRight className="w-4 h-4" />
           </button>
-        )}
+        ) : null}
       </div>
     </div>
   );
