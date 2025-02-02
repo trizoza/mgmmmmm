@@ -10,10 +10,24 @@ import {
 import Footer from "./components/footer";
 import Link from "next/link";
 
-const events = [
+interface Event {
+  date: string;
+  title: string;
+  description: string;
+  capacity: number;
+  attendees: number;
+  location: string;
+  thumbImage: string;
+  eventImage: string;
+  eventUrl: string;
+  reportUrl: string;
+}
+
+const events: Event[] = [
   {
     date: "Sat, Feb 22, 2025, 10:00 AM",
     title: "Makers gonna make - Episode 5",
+    description: "",
     capacity: 15,
     attendees: 12,
     location: "CodeBase, Edinburgh",
@@ -25,6 +39,7 @@ const events = [
   {
     date: "Sat, Jan 25, 2025, 10:00 AM",
     title: "Makers gonna make - Episode 4",
+    description: "",
     capacity: 15,
     attendees: 12,
     location: "CodeBase, Edinburgh",
@@ -37,6 +52,7 @@ const events = [
   {
     date: "Sat, Nov 16, 2024, 10:00 AM",
     title: "Makers gonna make - Episode 3",
+    description: "",
     capacity: 12,
     attendees: 11,
     location: "CodeBase, Edinburgh",
@@ -49,6 +65,7 @@ const events = [
   {
     date: "Sat, Oct 12, 2024, 10:00 AM",
     title: "Makers gonna make - Episode 2",
+    description: "",
     capacity: 12,
     attendees: 11,
     location: "CodeBase, Edinburgh",
@@ -61,6 +78,7 @@ const events = [
   {
     date: "Sat, Sep 21, 2024, 10:00 AM",
     title: "Makers gonna make",
+    description: "",
     capacity: 12,
     attendees: 7,
     location: "CodeBase, Edinburgh",
@@ -76,7 +94,7 @@ function EventCard({
   event,
   upcoming = false,
 }: {
-  event: any;
+  event: Event;
   upcoming: boolean;
 }) {
   return (
