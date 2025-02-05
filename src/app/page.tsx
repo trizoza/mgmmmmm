@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  Calendar,
-  Users,
-  Sparkles,
-  ArrowRight,
-  Code2,
-  Rocket,
-} from "lucide-react";
+import { Users, Sparkles, Code2, Rocket } from "lucide-react";
 import Footer from "./components/footer";
 import Link from "next/link";
+import { EventCard } from "./components/EventCard";
 
-interface Event {
+export interface Event {
   date: string;
   title: string;
   description: string;
@@ -18,7 +12,8 @@ interface Event {
   attendees: number;
   location: string;
   thumbImage: string;
-  eventImage: string;
+  eventImageA: string;
+  eventImageB: string;
   eventUrl: string;
   reportUrl: string;
 }
@@ -31,8 +26,9 @@ const events: Event[] = [
     capacity: 15,
     attendees: 12,
     location: "CodeBase, Edinburgh",
-    thumbImage: "/thumb-episode-5.avif",
-    eventImage: "",
+    thumbImage: "thumb-episode-5.jpg",
+    eventImageA: "",
+    eventImageB: "",
     eventUrl: "https://lu.ma/c410sjxy",
     reportUrl: "",
   },
@@ -43,8 +39,9 @@ const events: Event[] = [
     capacity: 15,
     attendees: 12,
     location: "CodeBase, Edinburgh",
-    thumbImage: "/thumb-episode-4.avif",
-    eventImage: "",
+    thumbImage: "thumb-episode-4.jpg",
+    eventImageA: "edinburgh-episode-4-A.jpg",
+    eventImageB: "edinburgh-episode-4-B.jpg",
     eventUrl: "https://lu.ma/0d99mx3r",
     reportUrl:
       "https://www.linkedin.com/posts/peter-trizuliak_work-on-a-cool-project-meet-inspiring-activity-7289292123118424064-1Qxm",
@@ -56,8 +53,9 @@ const events: Event[] = [
     capacity: 12,
     attendees: 11,
     location: "CodeBase, Edinburgh",
-    thumbImage: "/thumb-episode-3.avif",
-    eventImage: "",
+    thumbImage: "thumb-episode-3.jpg",
+    eventImageA: "edinburgh-episode-3-A.jpg",
+    eventImageB: "edinburgh-episode-3-B.jpg",
     eventUrl: "https://lu.ma/r8qeik4x",
     reportUrl:
       "https://www.linkedin.com/feed/update/urn:li:activity:7264024068385869824/",
@@ -69,8 +67,9 @@ const events: Event[] = [
     capacity: 12,
     attendees: 11,
     location: "CodeBase, Edinburgh",
-    thumbImage: "/thumb-episode-2.avif",
-    eventImage: "",
+    thumbImage: "thumb-episode-2.jpg",
+    eventImageA: "edinburgh-episode-2-A.jpg",
+    eventImageB: "edinburgh-episode-2-B.jpg",
     eventUrl: "https://lu.ma/xnxoxzvn",
     reportUrl:
       "https://www.linkedin.com/posts/peter-trizuliak_makersgonnamake-mgmmmmm-activity-7251494506456395777-dpRU?utm_source=share&utm_medium=member_desktop",
@@ -82,59 +81,14 @@ const events: Event[] = [
     capacity: 12,
     attendees: 7,
     location: "CodeBase, Edinburgh",
-    thumbImage: "/thumb-episode-1.avif",
-    eventImage: "",
+    thumbImage: "thumb-episode-1.jpg",
+    eventImageA: "edinburgh-episode-1-A.jpg",
+    eventImageB: "edinburgh-episode-1-B.jpg",
     eventUrl: "https://lu.ma/q3x3ucfk",
     reportUrl:
       "https://www.linkedin.com/posts/peter-trizuliak_big-shout-out-to-all-the-makers-who-showed-activity-7243607080996147200-sWF9?utm_source=share&utm_medium=member_desktop",
   },
 ];
-
-function EventCard({
-  event,
-  upcoming = false,
-}: {
-  event: Event;
-  upcoming: boolean;
-}) {
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-2 text-indigo-600">
-          <Calendar className="w-5 h-5" />
-          <span className="font-medium">{event.date}</span>
-        </div>
-        <div className="flex items-center space-x-1 text-gray-600">
-          <Users className="w-4 h-4" />
-          <span className="text-sm">
-            {upcoming ? event.capacity : `${event.attendees}/${event.capacity}`}
-          </span>
-        </div>
-      </div>
-      <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-      <p className="text-gray-600 mb-4">{event.description}</p>
-      <div className="flex items-center justify-between">
-        <span className="text-sm text-gray-500">{event.location}</span>
-        {upcoming ? (
-          <button className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700">
-            <Link href={event.eventUrl} target="_blank">
-              Register
-            </Link>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        ) : null}
-        {!upcoming && event.reportUrl ? (
-          <button className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700">
-            <Link href={event.reportUrl} target="_blank">
-              Read the report
-            </Link>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        ) : null}
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -207,7 +161,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-8">Upcoming events</h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-2 gap-8">
               {events
                 .filter(({ date }) => {
                   const jsdate = new Date(date);
@@ -220,7 +174,7 @@ export default function Home() {
           </div>
           <div>
             <h2 className="text-3xl font-bold mb-8">Past events</h2>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {events
                 .filter(({ date }) => {
                   const jsdate = new Date(date);

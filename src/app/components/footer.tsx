@@ -7,9 +7,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <h3 className="text-2xl font-bold">Makers gonna make</h3>
-            <p className="text-lg">Monthly hackathons for indie hackers</p>
+            <p className="text-lg">
+              Monthly hackathon style events for indie hackers
+            </p>
           </div>
-          <nav>
+          {/* <nav>
             <ul className="flex space-x-4">
               <li>
                 <Link
@@ -44,7 +46,7 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
         </div>
         <div className="mt-8 text-center">
           © {new Date().getFullYear()} Makers gonna make. All rights reserved.
