@@ -20,17 +20,31 @@ export interface Event {
 
 const events: Event[] = [
   {
-    date: "Sat, Feb 22, 2025, 10:00 AM",
-    title: "Makers gonna make - Episode 5",
+    date: "Sat, March 29, 2025, 10:00 AM",
+    title: "Makers gonna make - Episode 6",
     description: "",
     capacity: 15,
     attendees: 12,
     location: "CodeBase, Edinburgh",
-    thumbImage: "thumb-episode-5.jpg",
+    thumbImage: "thumb-episode-6.png",
     eventImageA: "",
     eventImageB: "",
-    eventUrl: "https://lu.ma/c410sjxy",
+    eventUrl: "https://lu.ma/3241ib0d",
     reportUrl: "",
+  },
+  {
+    date: "Sat, Feb 22, 2025, 10:00 AM",
+    title: "Makers gonna make - Episode 5",
+    description: "",
+    capacity: 15,
+    attendees: 19,
+    location: "CodeBase, Edinburgh",
+    thumbImage: "thumb-episode-5.jpg",
+    eventImageA: "edinburgh-episode-5-A.jpg",
+    eventImageB: "edinburgh-episode-5-B.jpg",
+    eventUrl: "https://lu.ma/c410sjxy",
+    reportUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7299452852362498048/",
   },
   {
     date: "Sat, Jan 25, 2025, 10:00 AM",
@@ -102,8 +116,31 @@ export default function Home() {
         }}
       >
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-[white] mb-8 mt-5">
-            Makers gonna make
+          <h1
+            className="text-4xl md:text-5xl font-bold text-[white] mb-8 mt-5 uppercase group cursor-pointer"
+            aria-label="Makers gonna make"
+          >
+            {"Makers gonna make".split(" ").map((word, wordIndex) => (
+              <span key={wordIndex} className="inline-block">
+                {[...word].map((letter, letterIndex) => (
+                  <span
+                    key={`${wordIndex}-${letterIndex}`}
+                    className="inline-block transition-transform duration-200 hover:-translate-y-4"
+                    aria-hidden="true"
+                  >
+                    {letter}
+                  </span>
+                ))}
+                {wordIndex !== 2 && (
+                  <span
+                    className="inline-block transition-transform duration-200 hover:-translate-y-2"
+                    aria-hidden="true"
+                  >
+                    {"\u00A0"}
+                  </span>
+                )}
+              </span>
+            ))}
           </h1>
           <h2 className="text-xl text-[lightgray] mb-8">
             A monthly hackathon style event for indie hackers, creators, and

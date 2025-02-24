@@ -32,7 +32,7 @@ export function EventCard({
       <div
         className={`flex-item bg-white shadow-md p-3 hover:shadow-lg transition-shadow flex items-center ${
           upcoming
-            ? `rounded-tl-lg rounded-bl-lg`
+            ? `rounded-lg sm:rounded-tr-none sm:rounded-br-none`
             : `rounded-bl-lg rounded-br-lg`
         } `}
       >
@@ -75,7 +75,7 @@ export function EventCard({
       {upcoming ? (
         <Link href={event.eventUrl} target="_blank">
           <button
-            className={`hidden sm:block flex-item h-full aspect-[1/1] bg-contain bg-center rounded-tr-lg rounded-br-lg`}
+            className={`hidden sm:block flex-item h-full aspect-[1/1] bg-contain bg-center rounded-tr-lg rounded-br-lg shadow-md hover:shadow-lg transition-shadow`}
             style={{
               backgroundImage: `url('/${event.thumbImage}')`,
             }}
