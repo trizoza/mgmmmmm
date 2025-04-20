@@ -27,10 +27,10 @@ const events: Event[] = [
     attendees: 12,
     location: "CodeBase, Edinburgh",
     thumbImage: "thumb-episode-6.png",
-    eventImageA: "",
-    eventImageB: "",
+    eventImageA: "edinburgh-episode-6-A.jpg",
+    eventImageB: "edinburgh-episode-6-B.jpg",
     eventUrl: "https://lu.ma/3241ib0d",
-    reportUrl: "",
+    reportUrl: "https://www.linkedin.com/pulse/makers-gonna-make-episode-6-peter-trizuliak-3gsee/?trackingId=ltWDmtTnvaWi%2F1QAWz1Qwg%3D%3D",
   },
   {
     date: "Sat, Feb 22, 2025, 10:00 AM",
