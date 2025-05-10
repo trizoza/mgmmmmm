@@ -20,6 +20,19 @@ export interface Event {
 
 const events: Event[] = [
   {
+    date: "Sat, May 24, 2025, 10:00 AM",
+    title: "Makers gonna make - Episode 7",
+    description: "",
+    capacity: 15,
+    attendees: 0,
+    location: "CodeBase, Edinburgh",
+    thumbImage: "thumb-episode-7.png",
+    eventImageA: "",
+    eventImageB: "",
+    eventUrl: "https://lu.ma/hkacoe77",
+    reportUrl: "",
+  },
+  {
     date: "Sat, March 29, 2025, 10:00 AM",
     title: "Makers gonna make - Episode 6",
     description: "",
