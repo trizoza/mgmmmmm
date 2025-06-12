@@ -20,6 +20,19 @@ export interface Event {
 
 const events: Event[] = [
   {
+    date: "Sat, June 28, 2025, 10:00 AM",
+    title: "Makers gonna make - Episode 8",
+    description: "",
+    capacity: 15,
+    attendees: 0,
+    location: "CodeBase, Edinburgh",
+    thumbImage: "thumb-episode-8.png",
+    eventImageA: "",
+    eventImageB: "",
+    eventUrl: "https://lu.ma/xwa4kduz",
+    reportUrl: "",
+  },
+  {
     date: "Sat, May 24, 2025, 10:00 AM",
     title: "Makers gonna make - Episode 7",
     description: "",
@@ -27,10 +40,10 @@ const events: Event[] = [
     attendees: 0,
     location: "CodeBase, Edinburgh",
     thumbImage: "thumb-episode-7.png",
-    eventImageA: "",
-    eventImageB: "",
+    eventImageA: "edinburgh-episode-7-A.jpeg",
+    eventImageB: "edinburgh-episode-7-B.jpeg",
     eventUrl: "https://lu.ma/hkacoe77",
-    reportUrl: "",
+    reportUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7332566153027854336/",
   },
   {
     date: "Sat, March 29, 2025, 10:00 AM",
