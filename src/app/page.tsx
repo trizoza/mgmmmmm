@@ -20,8 +20,8 @@ export interface Event {
 
 const events: Event[] = [
   {
-    date: "Sat, July 26, 2025, 10:00 AM",
-    title: "Makers gonna make - Dundee - Episode 1",
+    date: "Sat, August 9, 2025, 10:00 AM",
+    title: "Makers gonna make - Dundee - Episode 2",
     description: "",
     capacity: 15,
     attendees: 0,
@@ -29,8 +29,21 @@ const events: Event[] = [
     thumbImage: "thumb-dundee-episode-1.avif",
     eventImageA: "",
     eventImageB: "",
-    eventUrl: "https://lu.ma/dll9xxro",
+    eventUrl: "https://lu.ma/080yvrcp",
     reportUrl: "",
+  },
+  {
+    date: "Sat, July 26, 2025, 10:00 AM",
+    title: "Makers gonna make - Dundee - Episode 1",
+    description: "",
+    capacity: 15,
+    attendees: 15,
+    location: "The Flour Mill, Dundee",
+    thumbImage: "thumb-dundee-episode-1.avif",
+    eventImageA: "dundee-episode-1-A.jpg",
+    eventImageB: "dundee-episode-1-B.jpg",
+    eventUrl: "https://lu.ma/dll9xxro",
+    reportUrl: "https://www.linkedin.com/posts/dundee-founders-collective_makersgonnamake-dundeefounders-dfc-activity-7355507362373242880-JJIi",
   },
   {
     date: "Sat, June 28, 2025, 10:00 AM",
