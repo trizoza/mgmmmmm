@@ -8,10 +8,10 @@ This is a Next.js 15 application for "Makers gonna make" - a website showcasing 
 
 ## Development Commands
 
-- `npm run dev` - Start development server on http://localhost:3000
-- `npm run build` - Build production application  
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint for code quality checks
+- `bun dev` - Start development server on http://localhost:3000
+- `bun build` - Build production application  
+- `bun start` - Start production server
+- `bun lint` - Run ESLint for code quality checks
 
 ## Architecture
 
@@ -21,7 +21,7 @@ This is a Next.js 15 application for "Makers gonna make" - a website showcasing 
 - **Language**: TypeScript
 - **Icons**: Lucide React
 - **Fonts**: Geist and Geist Mono from next/font/google
-- **Analytics**: Splitbee (loaded in layout)
+- **Analytics**: SimpleAnalytics
 
 ### Project Structure
 ```
