@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script async src="https://cdn.splitbee.io/sb.js"></script>
+        <script async src="https://scripts.simpleanalyticscdn.com/latest.js" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

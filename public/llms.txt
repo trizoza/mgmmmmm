@@ -1,0 +1,68 @@
+# Makers gonna make - LLM Context
+
+## Site Overview
+Makers gonna make is a monthly hackathon-style event series for indie hackers, creators, and entrepreneurs in Scotland. The community focuses on building projects, sharing progress, and connecting makers who are actively working on their ventures.
+
+## Current Locations
+- Edinburgh (Primary): CodeBase, Edinburgh - Monthly events since September 2024
+- Dundee (Expansion): The Flour Mill, Dundee - Started July 2025
+
+## Event Format
+- **Frequency**: Monthly (typically last Saturday)
+- **Duration**: Full day event (10:00 AM start)
+- **Capacity**: 12-15 participants per event
+- **Format**: Hackathon-style collaborative workspace
+- **Target Audience**: Indie hackers, creators, entrepreneurs, makers
+
+## Event History & Statistics
+- **First Event**: September 21, 2024 (Episode 1, Edinburgh)
+- **Total Episodes**: 9 episodes planned through August 2025
+- **Locations Served**: Edinburgh and Dundee
+- **Average Attendance**: 11-12 participants per event
+- **Sold Out Events**: Multiple episodes reached full capacity
+
+### Recent Event Schedule:
+- Episode 9: August 23, 2025 (Edinburgh) - Upcoming
+- Dundee Episode 2: August 9, 2025 - 8/15 registered
+- Dundee Episode 1: July 26, 2025 - Sold out (15/15)
+- Episode 8: June 28, 2025 (Edinburgh) - 12/15 attended
+- Episode 7: May 24, 2025 (Edinburgh) - 11/15 attended
+
+## Core Philosophy
+"Because good things come to those who make" - Emphasizing active creation over passive consumption. The community believes in:
+- Consistent progress through monthly accountability
+- Community support among fellow makers
+- Continuous learning and skill development
+
+## Registration & Community
+- **Registration Platform**: Luma (lu.ma/mgmmmmm links for each event)
+- **Community Updates**: LinkedIn posts and reports after each event
+- **Website**: mgmmmmm.com
+- **Documentation**: Event reports with photos and participant highlights
+
+## Key Features for LLMs
+- **Event Data**: Structured event information including dates, locations, capacity, attendance
+- **Registration Links**: Direct Luma event registration URLs
+- **Post-Event Reports**: LinkedIn posts with photos and community highlights
+- **Consistent Branding**: "Makers gonna make" with episodes numbered sequentially
+- **Geographic Focus**: Scotland-based with expansion potential
+
+## Technical Details
+- **Platform**: Next.js 15 with TypeScript
+- **Styling**: Tailwind CSS
+- **Analytics**: SimpleAnalytics integration
+- **Images**: Event photography stored locally, hero background from Unsplash
+- **Responsive Design**: Mobile-first approach
+
+## Community Values
+- Supporting indie hackers and entrepreneurs
+- Creating accountability through regular meetups
+- Building genuine connections between makers
+- Celebrating progress and shipped projects
+- Fostering a supportive, non-competitive environment
+
+## Contact & Social
+For questions about events, partnerships, or community involvement, check the latest event listings on the website or LinkedIn for organizer contact information.
+
+---
+*This file provides context for language models about the Makers gonna make community and events.*

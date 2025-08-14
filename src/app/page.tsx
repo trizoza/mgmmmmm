@@ -211,6 +211,9 @@ export default function Home() {
             A monthly hackathon style event for indie hackers, creators, and
             entrepreneurs building their future.
           </h2>
+          <h2 className="text-xl text-[lightgray] mb-8">
+            Because good things come to those who make.
+          </h2>
           <div>
             <button className="bg-[#5046e5] text-white px-8 py-3 mb-3 rounded-lg font-medium hover:text-[#5046e5] hover:bg-[#9dff74] transition-colors flex items-center space-x-2 mx-auto">
               <Sparkles className="w-5 h-5" />
