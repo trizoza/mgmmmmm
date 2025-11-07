@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { Users, Sparkles, Code2, Rocket } from "lucide-react";
 import Footer from "./components/footer";
 import Link from "next/link";
@@ -20,6 +21,19 @@ export interface Event {
 
 const events: Event[] = [
   {
+    date: "Sat, September 27, 2025, 10:00 AM",
+    title: "Makers gonna make - Episode 10",
+    description: "",
+    capacity: 15,
+    attendees: 0,
+    location: "Edinburgh",
+    thumbImage: "thumb-episode-10.png",
+    eventImageA: "edinburgh-episode-10-A.jpg",
+    eventImageB: "edinburgh-episode-10-B.jpg",
+    eventUrl: "https://luma.com/2f4y30xn",
+    reportUrl: "https://www.linkedin.com/posts/peter-trizuliak_11-makers-locked-in-for-8-hours-on-another-activity-7378156457441275905-1j7g?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA5wQEUBBi0NQgVdQ64xN_68f0Q44sr9fAQ",
+  },
+  {
     date: "Sat, August 23, 2025, 10:00 AM",
     title: "Makers gonna make - Episode 9",
     description: "",
@@ -27,10 +41,10 @@ const events: Event[] = [
     attendees: 0,
     location: "Edinburgh",
     thumbImage: "thumb-episode-9.png",
-    eventImageA: "",
-    eventImageB: "",
+    eventImageA: "edinburgh-episode-1-A.jpg",
+    eventImageB: "edinburgh-episode-1-A.jpg",
     eventUrl: "https://lu.ma/od40tn78",
-    reportUrl: "",
+    reportUrl: "https://www.linkedin.com/posts/katy--smith_it-was-great-to-attend-makers-gonna-make-ugcPost-7366875399210823685-IUli?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA5wQEUBBi0NQgVdQ64xN_68f0Q44sr9fAQ",
   },
   {
     date: "Sat, August 9, 2025, 10:00 AM",
@@ -170,6 +184,33 @@ const events: Event[] = [
 ];
 
 export default function Home() {
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch upcoming events from iCal API
+    fetch('/api/events')
+      .then(res => res.json())
+      .then(data => {
+        // Sort events chronologically (earliest first)
+        const sortedEvents = data.sort((a: Event, b: Event) => {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        });
+        setUpcomingEvents(sortedEvents);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching upcoming events:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  // Filter hardcoded events to only show past events
+  const pastEvents = events.filter(({ date }) => {
+    const jsdate = new Date(date);
+    return !isNaN(jsdate.getTime()) && jsdate < new Date();
+  });
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -266,28 +307,28 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-8">Upcoming events</h2>
-            <div className="grid lg:grid-cols-2 gap-8">
-              {events
-                .filter(({ date }) => {
-                  const jsdate = new Date(date);
-                  return !isNaN(jsdate.getTime()) && jsdate >= new Date();
-                })
-                .map((event, index) => (
+            {loading ? (
+              <div className="text-center py-8">
+                <p className="text-gray-600">Loading upcoming events...</p>
+              </div>
+            ) : upcomingEvents.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-gray-600">No upcoming events at the moment. Check back soon!</p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-8">
+                {upcomingEvents.map((event, index) => (
                   <EventCard key={index} event={event} upcoming={true} />
                 ))}
-            </div>
+              </div>
+            )}
           </div>
           <div>
             <h2 className="text-3xl font-bold mb-8">Past events</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {events
-                .filter(({ date }) => {
-                  const jsdate = new Date(date);
-                  return !isNaN(jsdate.getTime()) && jsdate < new Date();
-                })
-                .map((event, index) => (
-                  <EventCard key={index} event={event} upcoming={false} />
-                ))}
+              {pastEvents.map((event, index) => (
+                <EventCard key={index} event={event} upcoming={false} />
+              ))}
             </div>
           </div>
         </div>

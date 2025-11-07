@@ -15,6 +15,12 @@ export function EventCard({
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
+  // Helper function to format image URL
+  const formatImageUrl = (image: string) => {
+    if (!image) return '';
+    return image.startsWith('http') ? image : `/${image}`;
+  };
+
   return (
     <div className={`flex ${upcoming ? `flex-row` : "flex-col"}`}>
       {!upcoming ? (
@@ -22,19 +28,18 @@ export function EventCard({
           className={`flex-item w-full aspect-[2/1] bg-cover bg-center rounded-tr-lg rounded-tl-lg`}
           style={{
             backgroundImage: isHovered
-              ? `url('/${event.eventImageB ?? event.eventImageA}')`
-              : `url('/${event.eventImageA}')`,
+              ? `url('${formatImageUrl(event.eventImageB ?? event.eventImageA)}')`
+              : `url('${formatImageUrl(event.eventImageA)}')`,
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         />
       ) : null}
       <div
-        className={`flex-item bg-white shadow-md p-3 hover:shadow-lg transition-shadow flex items-center ${
-          upcoming
+        className={`flex-item bg-white shadow-md p-3 hover:shadow-lg transition-shadow flex items-center ${upcoming
             ? `rounded-lg sm:rounded-tr-none sm:rounded-br-none`
             : `rounded-bl-lg rounded-br-lg`
-        } `}
+          } `}
       >
         <div className="flex-item grow">
           <div className="flex items-center justify-between mb-4">
@@ -72,12 +77,12 @@ export function EventCard({
           </div>
         </div>
       </div>
-      {upcoming ? (
+      {upcoming && event.thumbImage ? (
         <Link href={event.eventUrl} target="_blank">
           <button
-            className={`hidden sm:block flex-item h-full aspect-[1/1] bg-contain bg-center rounded-tr-lg rounded-br-lg shadow-md hover:shadow-lg transition-shadow`}
+            className={`hidden sm:block flex-item h-full aspect-[1/1] bg-cover bg-center rounded-tr-lg rounded-br-lg shadow-md hover:shadow-lg transition-shadow`}
             style={{
-              backgroundImage: `url('/${event.thumbImage}')`,
+              backgroundImage: `url('${formatImageUrl(event.thumbImage)}')`,
             }}
           />
         </Link>
