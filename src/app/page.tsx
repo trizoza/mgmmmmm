@@ -193,8 +193,11 @@ export default function Home() {
       .then(res => res.json())
       .then(data => {
         // Sort events chronologically (earliest first)
-        const sortedEvents = data.sort((a: Event, b: Event) => {
-          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        // Use dateISO if available for reliable sorting, otherwise fall back to parsing date string
+        const sortedEvents = data.sort((a: Event & { dateISO?: string }, b: Event & { dateISO?: string }) => {
+          const dateA = a.dateISO ? new Date(a.dateISO).getTime() : new Date(a.date).getTime();
+          const dateB = b.dateISO ? new Date(b.dateISO).getTime() : new Date(b.date).getTime();
+          return dateA - dateB;
         });
         setUpcomingEvents(sortedEvents);
         setLoading(false);

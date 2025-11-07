@@ -5,14 +5,6 @@ const ICAL_URLS = [
   { url: 'https://api2.luma.com/ics/get?entity=calendar&id=cal-n64Hav2BOilAax5', location: 'Edinburgh' },
   { url: 'https://api2.luma.com/ics/get?entity=calendar&id=cal-bffgrpCSNSdMw9X', location: 'Dundee' },
 ];
-const JSON_CALENDAR_URL = 'https://eventlinks.dundeefounders.scot/makers-gonna-make/mgmmmmm.json';
-
-interface JsonCalendarEvent {
-  name: string;
-  start: string;
-  timezone: string;
-  url: string;
-}
 
 async function fetchEventThumbnail(eventUrl: string): Promise<string> {
   try {
@@ -52,71 +44,6 @@ async function fetchEventThumbnail(eventUrl: string): Promise<string> {
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
     return '';
-  }
-}
-
-async function fetchJsonCalendar() {
-  try {
-    const response = await fetch(JSON_CALENDAR_URL, {
-      cache: 'no-store',
-    });
-
-    if (!response.ok) {
-      console.error('Failed to fetch JSON calendar');
-      return [];
-    }
-
-    const jsonEvents: JsonCalendarEvent[] = await response.json();
-    const now = new Date();
-
-    return jsonEvents
-      .filter(event => {
-        // Only include upcoming events with "Makers gonna make" or "Makers Gonna Make" in the name
-        const isUpcoming = new Date(event.start) >= now;
-        const isMakersEvent = event.name.toLowerCase().includes('makers gonna make');
-        return isUpcoming && isMakersEvent;
-      })
-      .map(event => {
-        const startDate = new Date(event.start);
-
-        // Extract location from event name or URL
-        let location = 'To be announced';
-        if (event.name.includes('Dundee')) {
-          location = 'Dundee';
-        } else if (event.name.includes('Flour Mill')) {
-          location = 'The Flour Mill, Dundee';
-        } else if (event.name.includes('Black Sheep')) {
-          location = 'Black Sheep Coffee, Dundee';
-        }
-
-        // Format date to match the iCal format
-        const formattedDate = startDate.toLocaleString('en-US', {
-          weekday: 'short',
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: '2-digit',
-          hour12: true,
-        });
-
-        return {
-          date: formattedDate,
-          title: event.name,
-          description: '',
-          capacity: 15,
-          attendees: 0,
-          location: location,
-          thumbImage: '',
-          eventImageA: '',
-          eventImageB: '',
-          eventUrl: event.url,
-          reportUrl: '',
-        };
-      });
-  } catch (error) {
-    console.error('Error fetching JSON calendar:', error);
-    return [];
   }
 }
 
@@ -199,6 +126,7 @@ async function fetchIcalCalendar(icalUrl: string, overrideLocation: string | nul
 
         return {
           date: formattedDate,
+          dateISO: startDate.toISOString(), // Store ISO string for reliable sorting
           title: event.summary || '',
           description: '',
           capacity: 15, // Default capacity, can't get from iCal
@@ -228,15 +156,17 @@ export async function GET() {
     );
 
     // Fetch JSON calendar events in parallel
-    const jsonPromise = fetchJsonCalendar();
+
 
     // Wait for all sources
-    const [jsonEvents, ...icalResults] = await Promise.all([jsonPromise, ...icalPromises]);
+    const [...icalResults] = await Promise.all([...icalPromises]);
     const allIcalEvents = icalResults.flat();
+
+
 
     // Merge events from all sources
     // Put JSON events first so they take precedence during deduplication
-    const allEvents = [...jsonEvents, ...allIcalEvents];
+    const allEvents = [...allIcalEvents];
 
     // Deduplicate by URL (in case same event is in both sources)
     // Strip query parameters when comparing URLs
@@ -249,8 +179,14 @@ export async function GET() {
       return acc;
     }, [] as typeof allEvents);
 
-    // Sort by date (earliest first)
-    uniqueEvents.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    console.log(uniqueEvents);
+
+    // Sort by date (earliest first) using ISO string for reliable sorting
+    uniqueEvents.sort((a, b) => {
+      const dateA = a.dateISO ? new Date(a.dateISO).getTime() : new Date(a.date).getTime();
+      const dateB = b.dateISO ? new Date(b.dateISO).getTime() : new Date(b.date).getTime();
+      return dateA - dateB;
+    });
 
     // Fetch thumbnails for all upcoming events in parallel
     const eventsWithThumbnails = await Promise.all(
@@ -263,7 +199,7 @@ export async function GET() {
       })
     );
 
-    console.log(`Found ${allIcalEvents.length} iCal events, ${jsonEvents.length} JSON events, ${eventsWithThumbnails.length} total upcoming`);
+    console.log(`Found ${allIcalEvents.length} iCal events, ${eventsWithThumbnails.length} total upcoming`);
 
     return NextResponse.json(eventsWithThumbnails);
   } catch (error) {
